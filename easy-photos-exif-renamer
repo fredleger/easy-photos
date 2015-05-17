@@ -1,0 +1,4 @@
+#!/bin/bash
+
+echo "renaming with exif dates"
+find $EZPworkdir -maxdepth 1 -iname '*.jpg' -exec exiv2 mv -t -F -r '%Y-%m-%d_%H-%M-%S' {} \;

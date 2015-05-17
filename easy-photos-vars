@@ -1,0 +1,16 @@
+#!/bin/bash
+
+# defines some vars
+if [ -z $1 ]; then
+    EZPworkdir=$PWD
+else
+    EZPworkdir=$1
+fi
+
+EZPlowresdir=/media/sdcard/upload/photos/lowres
+EZPfullresdir=/media/sdcard/upload/photos/fullres
+
+# make vars available
+export EZPworkdir
+export EZPlowresdir
+export EZPfullresdir

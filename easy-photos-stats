@@ -1,0 +1,10 @@
+#!/bin/bash
+
+fullresdir=/media/sdcard/upload/photos/fullres/
+
+echo 'date;nbPhotos'
+
+for dir in $(ls -1 $fullresdir); do
+    echo -n "$dir;"
+    find $fullresdir/$dir -iname '*.jpg' 2>/dev/null | wc -l
+done

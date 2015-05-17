@@ -1,0 +1,8 @@
+#!/bin/bash
+
+if [ "-force" == "$1" ]; then
+	FFLAG="-f"
+fi
+
+cd /media/sdcard/upload/photos/fullres && rename $FFLAG 's/(\d\d\d\d-\d\d-\d\d)_(.*)\.jpg/$1\/$1_$2.jpg/' *.jpg
+cd /media/sdcard/upload/photos/lowres  && rename $FFLAG 's/lowres-(\d\d\d\d-\d\d-\d\d)_(.*)\.jpg/$1\/lowres-$1_$2.jpg/' *.jpg

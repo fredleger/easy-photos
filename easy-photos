@@ -1,0 +1,22 @@
+#/bin/sh
+
+source $(dirname $0)/easy-photos-vars
+
+echo "renaming with exif dates"
+find $EZPworkdir -maxdepth 1 -iname '*.jpg' -exec exiv2 mv -t -F -r '%Y-%m-%d_%H-%M-%S' {} \;
+
+echo "resizing"
+find $EZPworkdir -maxdepth 1 -iname '????-??-??_*.jpg' -exec convert -resize '800>' {} {}.lowres \;
+
+echo "renaming lowres"
+# 2015-03-13_09-51-24.jpg.lowres
+find $EZPworkdir -maxdepth 1 -iname '*.jpg.lowres' -exec rename 's/(.*\/)?(.*)\.jpg\.lowres/$1\/lowres-$2.jpg/i' {} \;
+
+echo "optimizing lowres"
+find $EZPworkdir -maxdepth 1 -iname 'lowres-*.jpg' -exec jpegoptim -p $EZPworkdir/lowres-*.jpg {} > /dev/null \;
+
+echo "fixing timestamps of fullres"
+find $EZPworkdir -maxdepth 1 -iname '????-??-??_*.jpg' -exec ~/bin/easy-photos-ts-fixer.pl {} \;
+
+echo "fixing timestamps of lowres"
+find $EZPworkdir -maxdepth 1 -iname 'lowres-*.jpg' -exec ~/bin/easy-photos-ts-fixer.pl {} \;

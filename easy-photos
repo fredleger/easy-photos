@@ -6,7 +6,7 @@ echo "renaming with exif dates"
 find $EZPworkdir -maxdepth 1 -iname '*.jpg' -exec exiv2 mv -t -F -r '%Y-%m-%d_%H-%M-%S' {} \;
 
 echo "resizing"
-find $EZPworkdir -maxdepth 1 -iname '????-??-??_*.jpg' -exec convert -resize '800>' {} {}.lowres \;
+find $EZPworkdir -maxdepth 1 -iname '????-??-??_*.jpg' -exec convert -thumbnail 'x600>' {} {}.lowres \;
 
 echo "renaming lowres"
 # 2015-03-13_09-51-24.jpg.lowres

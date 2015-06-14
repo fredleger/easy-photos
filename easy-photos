@@ -13,7 +13,7 @@ echo "renaming lowres"
 find $EZPworkdir -maxdepth 1 -iname '*.jpg.lowres' -exec rename 's/(.*\/)?(.*)\.jpg\.lowres/$1\/lowres-$2.jpg/i' {} \;
 
 echo "optimizing lowres"
-find $EZPworkdir -maxdepth 1 -iname 'lowres-*.jpg' -exec jpegoptim -p $EZPworkdir/lowres-*.jpg {} > /dev/null \;
+find $EZPworkdir -maxdepth 1 -iname 'lowres-*.jpg' -exec jpegoptim -p {} > /dev/null \;
 
 echo "fixing timestamps of fullres"
 find $EZPworkdir -maxdepth 1 -iname '????-??-??_*.jpg' -exec ~/bin/easy-photos-ts-fixer.pl {} \;

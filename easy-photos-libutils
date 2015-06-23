@@ -1,0 +1,12 @@
+#!/bin/bash
+
+function msg {
+	echo -n $(timestamp)
+	echo $*
+}
+
+function timestamp {
+	echo -n '['
+	echo -n $(date +"%Y-%m-%d %H:%M:%S")
+	echo -n '] : '
+}

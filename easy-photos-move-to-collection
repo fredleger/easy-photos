@@ -1,6 +1,7 @@
 #!/bin/bash
 
 source $(dirname $0)/easy-photos-vars
+source $(dirname $0)/easy-photos-libutils
 
 echo "moving lowres"
 mv $EZPworkdir/lowres-*.jpg $EZPlowresdir/

@@ -9,8 +9,12 @@ fi
 
 EZPlowresdir=/media/sdcard/upload/photos/lowres
 EZPfullresdir=/media/sdcard/upload/photos/fullres
+EZPremotefullres=blog:/data/upload/photos/fullres
+EZPremotelowres=blog:/data/upload/photos/lowres
 
 # make vars available
 export EZPworkdir
 export EZPlowresdir
 export EZPfullresdir
+export EZPremotefullres
+export EZPremotelowres

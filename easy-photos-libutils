@@ -8,5 +8,6 @@ function msg {
 function timestamp {
 	echo -n '['
 	echo -n $(date +"%Y-%m-%d %H:%M:%S")
-	echo -n '] : '
+	echo -n '] :'
+	echo ' '
 }

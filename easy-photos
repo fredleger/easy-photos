@@ -1,22 +1,26 @@
-#/bin/sh
+#/bin/bash
 
 source $(dirname $0)/easy-photos-vars
+source $(dirname $0)/easy-photos-libutils
 
-echo "renaming with exif dates"
+msg "renaming with exif dates"
 find $EZPworkdir -maxdepth 1 -iname '*.jpg' -exec exiv2 mv -t -F -r '%Y-%m-%d_%H-%M-%S' {} \;
 
-echo "resizing"
+msg "resizing"
 find $EZPworkdir -maxdepth 1 -iname '????-??-??_*.jpg' -exec convert -thumbnail 'x600>' {} {}.lowres \;
 
-echo "renaming lowres"
+msg "renaming lowres"
 # 2015-03-13_09-51-24.jpg.lowres
 find $EZPworkdir -maxdepth 1 -iname '*.jpg.lowres' -exec rename 's/(.*\/)?(.*)\.jpg\.lowres/$1\/lowres-$2.jpg/i' {} \;
 
-echo "optimizing lowres"
+msg "optimizing lowres"
 find $EZPworkdir -maxdepth 1 -iname 'lowres-*.jpg' -exec jpegoptim -p {} > /dev/null \;
 
-echo "fixing timestamps of fullres"
+msg "fixing timestamps of fullres"
 find $EZPworkdir -maxdepth 1 -iname '????-??-??_*.jpg' -exec ~/bin/easy-photos-ts-fixer.pl {} \;
 
-echo "fixing timestamps of lowres"
+msg "fixing timestamps of lowres"
 find $EZPworkdir -maxdepth 1 -iname 'lowres-*.jpg' -exec ~/bin/easy-photos-ts-fixer.pl {} \;
+
+msg "Done"
+msg "You should know run easy-photos-move-to-collection"

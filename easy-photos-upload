@@ -1,0 +1,12 @@
+#!/bin/bash
+
+source $(dirname $0)/easy-photos-vars
+source $(dirname $0)/easy-photos-libutils
+
+msg "Sync fullres with remote"
+rsync -aO --progress --size-only ${EZPfullresdir}/ ${EZPremotefullres}/
+
+msg "Sync lowres with remote"
+rsync -aO --progress --size-only ${EZPlowresdir}/ ${EZPremotelowres}/
+
+msg "done !"

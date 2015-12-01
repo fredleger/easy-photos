@@ -4,5 +4,8 @@ if [ "-force" == "$1" ]; then
 	FFLAG="-f"
 fi
 
-cd /media/sdcard/upload/photos/fullres && rename $FFLAG 's/(\d\d\d\d-\d\d-\d\d)_(.*)\.jpg/$1\/$1_$2.jpg/' *.jpg
-cd /media/sdcard/upload/photos/lowres  && rename $FFLAG 's/lowres-(\d\d\d\d-\d\d-\d\d)_(.*)\.jpg/$1\/lowres-$1_$2.jpg/' *.jpg
+source $(dirname $0)/easy-photos-vars
+source $(dirname $0)/easy-photos-libutils
+
+cd ${EZPfullresdir} && rename $FFLAG 's/(\d\d\d\d-\d\d-\d\d)_(.*)\.jpg/$1\/$1_$2.jpg/' *.jpg
+cd ${EZPlowresdir}  && rename $FFLAG 's/lowres-(\d\d\d\d-\d\d-\d\d)_(.*)\.jpg/$1\/lowres-$1_$2.jpg/' *.jpg

@@ -7,10 +7,16 @@ else
     EZPworkdir=$1
 fi
 
-EZPlowresdir=/media/sdcard/upload/photos/lowres
-EZPfullresdir=/media/sdcard/upload/photos/fullres
-EZPremotefullres=blog:/data/upload/photos/fullres
-EZPremotelowres=blog:/data/upload/photos/lowres
+if [ -z $(which confget) ]; then
+    echo 'ERROR : look like your system is missing confget tool you should install it before running easy-photos'
+    exit 1
+else
+
+    EZPlowresdir=$(confget -f $HOME/.config/easy-photos.conf -s LOCAL EZPlowresdir)
+    EZPfullresdir=$(confget -f $HOME/.config/easy-photos.conf -s LOCAL EZPfullresdir)
+    EZPremotelowres=$(confget -f $HOME/.config/easy-photos.conf -s REMOTE EZPremotelowres)
+    EZPremotefullres=$(confget -f $HOME/.config/easy-photos.conf -s REMOTE EZPremotefullres)
+fi
 
 # make vars available
 export EZPworkdir

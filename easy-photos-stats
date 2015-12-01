@@ -1,10 +1,15 @@
 #!/bin/bash
 
-fullresdir=/media/sdcard/upload/photos/fullres/
+source $(dirname $0)/easy-photos-vars
+source $(dirname $0)/easy-photos-libutils
 
-echo 'date;nbPhotos'
+echo 'date;nbPhotos;type'
+for dir in $(ls -1 $EZPfullresdir); do
+    nb=$(find $EZPfullresdir/$dir -iname '*.jpg' 2>/dev/null | wc -l)
+    echo "$dir;$nb;fullres"
+done
 
-for dir in $(ls -1 $fullresdir); do
-    echo -n "$dir;"
-    find $fullresdir/$dir -iname '*.jpg' 2>/dev/null | wc -l
+for dir in $(ls -1 $EZPlowresdir); do
+    nb=$(find $EZPlowresdir/$dir -iname '*.jpg' 2>/dev/null | wc -l)
+    echo "$dir;$nb;lowres"
 done

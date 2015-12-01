@@ -1,0 +1,22 @@
+#!/bin/bash
+
+source $(dirname $0)/easy-photos-vars
+source $(dirname $0)/easy-photos-libutils
+
+YEAR=$1
+DAY="$YEAR-01-01"
+
+if [ -z $YEAR ]; then
+    echo 'Usage: '
+    echo "    $(basename $0) : <year>"
+    exit 1
+fi
+
+# FIXME : sometime 366 !
+while (true); do
+    [ ! -d $DAY ] && mkdir $DAY
+    DAY=$(date +%Y-%m-%d -d "$DAY +1 day")
+    if [ $DAY == $(date +%Y-%m-%d -d "$YEAR-01-01 +1 year") ]; then
+        break;
+    fi
+done

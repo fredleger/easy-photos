@@ -17,10 +17,10 @@ msg "optimizing lowres"
 find $EZPworkdir -maxdepth 1 -iname 'lowres-*.jpg' -exec jpegoptim -p {} > /dev/null \;
 
 msg "fixing timestamps of fullres"
-find $EZPworkdir -maxdepth 1 -iname '????-??-??_*.jpg' -exec ~/bin/easy-photos-ts-fixer.pl {} \;
+find $EZPworkdir -maxdepth 1 -iname '????-??-??_*.jpg' -exec $(dirname $0)/easy-photos-ts-fixer.pl {} \;
 
 msg "fixing timestamps of lowres"
-find $EZPworkdir -maxdepth 1 -iname 'lowres-*.jpg' -exec ~/bin/easy-photos-ts-fixer.pl {} \;
+find $EZPworkdir -maxdepth 1 -iname 'lowres-*.jpg' -exec $(dirname $0)/easy-photos-ts-fixer.pl {} \;
 
 msg "Done"
-msg "You should know run easy-photos-move-to-collection"
+msg "You should now run easy-photos-move-to-collection"
